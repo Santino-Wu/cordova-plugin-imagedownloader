@@ -1,9 +1,6 @@
 #import <Cordova/CDVPlugin.h>
 
-@interface ImageDownloader : CDVPlugin
-{
-    NSString* _callbackId;
-}
+@interface ImageDownloader : CDVPlugin {}
 
 - (void) download:(CDVInvokedUrlCommand*)command;
 
