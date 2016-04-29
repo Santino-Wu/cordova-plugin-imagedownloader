@@ -28,24 +28,24 @@ public class ImageDownloader extends CordovaPlugin {
     public final static String SUCCESS_MESSAGE = "success";
     public final static String FAILURE_MESSAGE = "failure";
 
-    private CallbackContext _callbackContext;
-
     @Override
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        _callbackContext = callbackContext;
-
+    public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
         final String url = args.getString(0);
 
         if (action.equals(ACTION_DOWNLOAD)) {
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
-                    if (true == download(url)) {
-                        _callbackContext.success(SUCCESS_MESSAGE);
+                    File image = download(url);
+
+                    if (image != null) {
+                        callbackContext.success(SUCCESS_MESSAGE);
+
+                        scanImage(image);
 
                         return;
                     }
 
-                    _callbackContext.error(FAILURE_MESSAGE);
+                    callbackContext.error(FAILURE_MESSAGE);
                 }
             });
 
@@ -55,15 +55,13 @@ public class ImageDownloader extends CordovaPlugin {
         return false;
     }
 
-    private Boolean download(String urlStr) {
+    private File download(String urlStr) {
         URL url = getURL(urlStr);
 
         if (null == url) {
             Log.d(Log_TAG, "Fail to get URL");
 
-            _callbackContext.error(FAILURE_MESSAGE);
-
-            return false;
+            return null;
         }
 
         Log.d(Log_TAG, String.format("Downloading image from URL: %s", url.toString()));
@@ -73,9 +71,7 @@ public class ImageDownloader extends CordovaPlugin {
         if (null == bitmap) {
             Log.d(Log_TAG, "Failed to download image");
 
-            _callbackContext.error(FAILURE_MESSAGE);
-
-            return false;
+            return null;
         }
 
         File image = saveImage(bitmap, url);
@@ -83,14 +79,10 @@ public class ImageDownloader extends CordovaPlugin {
         if (null == image) {
             Log.d(Log_TAG, "Failed to save image");
 
-            _callbackContext.error(FAILURE_MESSAGE);
-
-            return false;
+            return null;
         }
 
-        scanImage(image);
-
-        return true;
+        return image;
     }
 
     private URL getURL(String urlStr) {
@@ -166,6 +158,8 @@ public class ImageDownloader extends CordovaPlugin {
     }
 
     private void scanImage(File image) {
+        Log.d(Log_TAG, "Scanning downloaded Image");
+
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         Uri contentUri = Uri.fromFile(image);
 
