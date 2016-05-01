@@ -1,0 +1,25 @@
+{
+  "name": "cordova-plugin-imagedownloader",
+  "version": "1.0.0",
+  "description": "The cordova plugin for downloading image into gallery.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Santino-Wu/cordova-plugin-imagedownloader.git"
+  },
+  "keywords": [
+    "Cordova",
+    "Image",
+    "Downloader",
+    "Gallery"
+  ],
+  "author": "Santino-Wu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Santino-Wu/cordova-plugin-imagedownloader/issues"
+  },
+  "homepage": "https://github.com/Santino-Wu/cordova-plugin-imagedownloader#readme"
+}
