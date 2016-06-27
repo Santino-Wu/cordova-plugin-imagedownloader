@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	id="com.santinowu.cordova.imagedownloader"
-	version="1.0.0">
+	version="1.0.1">
 
 	<name>ImageDownloader</name>
 	<description>The cordova plugin for downloading image into gallery.</description>
@@ -26,6 +26,7 @@
 			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 			<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
 			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+			<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 			<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 			<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 		</config-file>

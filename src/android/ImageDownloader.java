@@ -99,16 +99,35 @@ public class ImageDownloader extends CordovaPlugin {
         return url;
     }
 
-    private File getImagePath() {
+    private boolean isExternalStorageWritable(File path) {
         return Environment
-            .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+            .MEDIA_MOUNTED
+            .equals(Environment.getExternalStorageState(path)) &&
+            path.canWrite();
+    }
+
+    private File getImageFile(String fileName) {
+        File exPicPath = Environment
+                .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File exPath = Environment.getExternalStorageDirectory();
+
+        if (isExternalStorageWritable(exPicPath)) {
+            return new File(exPicPath, fileName);
+        }
+
+        if (isExternalStorageWritable(exPath)) {
+            return new File(exPath, fileName);
+        }
+
+        return new File(Environment.getDataDirectory(), fileName);
     }
 
     private File saveImage(Bitmap bitmap, URL url) {
         File imageFile = null;
+        String fileName = getFileName(url);
 
         try {
-            imageFile = new File(getImagePath(), getFileName(url));
+            imageFile = getImageFile(fileName);
 
             FileOutputStream fos = new FileOutputStream(imageFile);
 
