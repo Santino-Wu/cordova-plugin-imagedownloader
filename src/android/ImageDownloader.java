@@ -18,6 +18,7 @@ import android.util.Log;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.os.Build.VERSION;
 import android.webkit.URLUtil;
 import android.content.Intent;
 import android.net.Uri;
@@ -100,6 +101,12 @@ public class ImageDownloader extends CordovaPlugin {
     }
 
     private boolean isExternalStorageWritable(File path) {
+        if (android.os.Build.VERSION.SDK_INT < 21) {
+            return Environment
+                .MEDIA_MOUNTED
+                .equals(Environment.getStorageState(path)) &&
+                path.canWrite();
+        }
         return Environment
             .MEDIA_MOUNTED
             .equals(Environment.getExternalStorageState(path)) &&
