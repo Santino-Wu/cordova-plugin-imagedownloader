@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="com.santinowu.cordova.imagedownloader"
-    version="1.0.1">
+    version="1.0.3">
 
     <name>ImageDownloader</name>
     <description>The cordova plugin for downloading image into gallery.</description>

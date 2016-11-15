@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-imagedownloader",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "The cordova plugin for downloading image into gallery.",
   "main": "index.js",
   "scripts": {
