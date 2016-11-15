@@ -44,5 +44,10 @@
 
 		<header-file src="src/ios/ImageDownloader.h" />
 		<source-file src="src/ios/ImageDownloader.m" />
+
+		<preference name="PHOTOLIBRARY_USAGE_DESCRIPTION" default="Requires permission for saving image into Photos" />
+		<config-file target="*-Info.plist" parent="NSPhotoLibraryUsageDescription">
+			<string>$PHOTOLIBRARY_USAGE_DESCRIPTION</string>
+		</config-file>
 	</platform>
 </plugin>
