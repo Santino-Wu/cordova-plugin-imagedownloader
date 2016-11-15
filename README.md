@@ -13,8 +13,10 @@ Installation
 ------------
 
 ```
-cordova plugin add https://github.com/Santino-Wu/cordova-plugin-imagedownloader.git
+cordova plugin add cordova-plugin-imagedownloader --variable PHOTOLIBRARY_USAGE_DESCRIPTION="explain why you require accessing Photo"
 ```
+
+> The variable `PHOTOLIBRARY_USAGE_DESCRIPTION` is only for iOS to explain why you require accessing Photo, defaults to "Requires permission for saving image into Photos".
 
 Usage
 -----
